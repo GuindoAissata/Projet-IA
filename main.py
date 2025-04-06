@@ -66,7 +66,7 @@ canvas.pack()
 frame_genetic = tk.Frame(fenetre,bg = "white")
 frame_genetic.pack(side=tk.BOTTOM,fill=tk.BOTH,expand=True)
 
-label2 = tk.Label(frame_genetic, text="OUTPUT OF THE ALGORITHME", bg="white", font=("Arial", 14))
+label2 = tk.Label(frame_genetic, text="OUTPUT OF THE ALGORITHM", bg="white", font=("Arial", 14))
 label2.pack(pady=10)
 
 #Canvas pour afficher le résultat de l'algorithme
@@ -88,7 +88,7 @@ entry.pack()
 bouton1= tk.Button(frame_genere_ville, text = "generate cities", command = generer_villes)
 bouton1.pack(pady=5)
 
-bouton2 = tk.Button(frame_genetic,text="Run the genetic algorithme", command=run_algo)
+bouton2 = tk.Button(frame_genetic,text="Run the genetic algorithm", command=run_algo)
 bouton2.pack(pady=5)
 
 label_distance = tk.Label(frame_genetic,text="BEST DISTANCE : ")
@@ -96,6 +96,35 @@ label_distance.pack()
 
 # Lancer l'application
 fenetre.mainloop()
+
+
+###########TEST DES FONCTIONS #####################
+# Liste de villes (coordonnées fictives)
+villes_test = [(100, 200), (250, 400), (50, 50), (300, 150)]
+
+# Taille de la population à générer
+taille_population_test = 5
+
+# Appel de la fonction
+population_generee = creer_population(villes_test, taille_population_test)
+
+parent1,parent2 = selection(population_generee,3)
+enfant_i = crossover(parent1,parent2)
+enfant_f= mutation(enfant_i)
+nouvelle_pop = formation(population_generee,enfant_i)
+best_way, best_fit = genetique(villes_test,taille_population_test)
+
+# Affichage des résultats
+print("Population générée :")
+for i, individu in enumerate(population_generee):
+    print(f"Itinéraire {i+1} : {individu} fitness{i+1} : {fitness(individu)}")
+
+print (f"parents séletionnes :  {parent1} , {parent2}")
+print (f"un enfant des parents sélectionnés est : {enfant_i} ")
+print (f"un enfant des parents sélectionnés après mutation est : {enfant_f} ")
+print (f"La nouvelle population est : {nouvelle_pop}")
+print (f"le meilleur chemin est {best_way}")
+print (f"la meilleure distance est :  {best_fit}")
 
 
 
