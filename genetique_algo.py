@@ -5,7 +5,7 @@ def genetique(villes,taille_pop):
 #principe : on repète tant qu'on améliore , donc si first_best n'a pas pas changé au cours de l'algo on s'arrête sinon tant que ça change on continue
     population = creer_population(villes,taille_pop)
     first_best = max(population, key=fitness)
-    while(True):
+    for _ in range(500):
         #selection des parents 
         parent1,parent2 = selection(population,k=3)
 
@@ -19,10 +19,11 @@ def genetique(villes,taille_pop):
         population = formation(population,enfant)
         
         #find of the best way
-        best = max(population,key = fitness)
+        first_best = max(population,key = fitness)
 
         #si la fitness optimal augmente(c-a-d la distance diminue) alors on continu sinon on s'arrête
-        if fitness(best) > fitness(first_best) :  
-            first_best = best
-        else : break #si l'ancine optimal est inférieure au nouveau alors pas d'amélioration on arrête
+        #if fitness(best) > fitness(first_best) :  
+            #first_best = best
+        #else : break #si l'ancine optimal est inférieure au nouveau alors pas d'amélioration on arrête
     return first_best , 1/fitness(first_best)
+
